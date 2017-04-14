@@ -1,9 +1,29 @@
 
 $( document ).ready(function() {
-  var button = document.getElementsByTagName('button')[0];
-
-button.addEventListener('click', requestJSON);
-
+    
+    
+    var body = document.getElementsByTagName("body")[0];
+    var container = document.getElementsByTagName("div")[0];
+    var button = document.getElementsByTagName('button')[0];
+    var buttonTopRepozit = document.createElement('button');
+    var buttonTopStars = document.createElement('button');
+    
+    button.addEventListener('click', creaButtonTopStars);
+    button.addEventListener('click', creaButtonTopRepozit);
+    button.addEventListener('click', requestJSON);
+    buttonTopStars.addEventListener('click', requestJSONtopStars);
+    buttonTopRepozit.addEventListener('click', requestJSONtopRepozit);
+    
+    function creaButtonTopStars() {
+        container.appendChild(buttonTopStars);
+        buttonTopStars.innerHTML = "TOP REPOSITORY";
+    };
+    
+    function creaButtonTopRepozit() {
+        container.appendChild(buttonTopRepozit);
+        buttonTopRepozit.innerHTML = "TOP RATINGS"
+    };
+    
     function requestJSON() {
      $.ajax({
           url: "https://api.github.com/users",
@@ -12,26 +32,37 @@ button.addEventListener('click', requestJSON);
             console.error('ERROR in get request with status ' + error.status);
      }
     }) 
-    }
+    };
+    
+    function requestJSONtopStars() {
+     $.ajax({
+          url: "https://api.github.com/search/repositories?q=js&sort=stars&order=desc",
+          success: getUsers,
+          error: function(error) {
+            console.error('ERROR in get request with status ' + error.status);
+     }
+    }) 
+    };
+    
     
     function getUsers(data) {
         
-        var body = document.getElementsByTagName("body")[0];
         for(var i = 0; i < data.length; i++){
             console.log(data[i]);
             var div = document.createElement("div");
-            body.appendChild(div);
+            container.appendChild(div);
+            div.className = "info";
             var image = document.createElement("img");
             image.src = data[i].avatar_url;
-            image.width = '50';
+            image.width = '100';
             div.appendChild(image);
             var login = document.createElement("h3");
+            login.className = "info-text";
             login.innerHTML = data[i].login;
             div.appendChild(login);
         }
             
-        
-//        console.log(data);
+//                console.log(data);
     }
     
     
