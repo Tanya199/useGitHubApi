@@ -4,24 +4,31 @@ $( document ).ready(function() {
     
     var body = document.getElementsByTagName("body")[0];
     var container = document.getElementsByTagName("div")[0];
+    var wrapperButton = document.getElementsByTagName('div')[1];
     var button = document.getElementsByTagName('button')[0];
     var buttonTopRepozit = document.createElement('button');
     var buttonTopStars = document.createElement('button');
+    var wrapTopRepozit = document.createElement('div');
+    var wrapTopStars = document.createElement('div');
     
     button.addEventListener('click', creaButtonTopStars);
     button.addEventListener('click', creaButtonTopRepozit);
     button.addEventListener('click', requestJSON);
-    buttonTopStars.addEventListener('click', requestJSONtopStars);
-    buttonTopRepozit.addEventListener('click', requestJSONtopRepozit);
+    
     
     function creaButtonTopStars() {
-        container.appendChild(buttonTopStars);
+        container.appendChild(wrapTopStars);
+        wrapTopStars.appendChild(buttonTopStars);
         buttonTopStars.innerHTML = "TOP REPOSITORY";
+        buttonTopStars.addEventListener('click', requestJSONtopStars);
     };
     
     function creaButtonTopRepozit() {
-        container.appendChild(buttonTopRepozit);
-        buttonTopRepozit.innerHTML = "TOP RATINGS"
+        container.appendChild(wrapTopRepozit);
+        wrapTopRepozit.appendChild(buttonTopRepozit);
+        buttonTopRepozit.innerHTML = "TOP RATINGS";
+        buttonTopRepozit.addEventListener('click', requestJSONtopRepozit)
+
     };
     
     function requestJSON() {
@@ -37,7 +44,17 @@ $( document ).ready(function() {
     function requestJSONtopStars() {
      $.ajax({
           url: "https://api.github.com/search/repositories?q=js&sort=stars&order=desc",
-          success: getUsers,
+          success: getTopUsers,
+          error: function(error) {
+            console.error('ERROR in get request with status ' + error.status);
+     }
+    }) 
+    };
+    
+    function requestJSONtopRepozit() {
+     $.ajax({
+          url: "https://api.github.com/search/repositories?q=language:JavaScript",
+          success: getTopRepozitory,
           error: function(error) {
             console.error('ERROR in get request with status ' + error.status);
      }
@@ -46,11 +63,11 @@ $( document ).ready(function() {
     
     
     function getUsers(data) {
-        
+         var mainDiv = document.createElement("div");
+        wrapperButton.appendChild(mainDiv);
         for(var i = 0; i < data.length; i++){
-            console.log(data[i]);
             var div = document.createElement("div");
-            container.appendChild(div);
+            mainDiv.appendChild(div);
             div.className = "info";
             var image = document.createElement("img");
             image.src = data[i].avatar_url;
@@ -64,57 +81,51 @@ $( document ).ready(function() {
             
 //                console.log(data);
     }
+    function getTopUsers(data) {
+        console.log(data);
+        var mainDiv = document.createElement("div");
+        wrapTopStars.appendChild(mainDiv);
+        
+        for(var i = 0; i < data.items.length; i++){
+            var div = document.createElement("div");
+            mainDiv.appendChild(div);
+            div.className = "info";
+            var image = document.createElement("img");
+            image.src = data.items[i].owner.avatar_url;
+            image.width = '100';
+            div.appendChild(image);
+            var login = document.createElement("h3");
+            login.className = "info-text";
+            login.innerHTML = data.items[i].owner.login;
+            div.appendChild(login);
+        }
+            
+//                console.log(data);
+    }
+    
+    function getTopRepozitory(data) {
+        console.log(data);
+        var mainDiv = document.createElement("div");
+        wrapTopRepozit.appendChild(mainDiv);
+        
+        for(var i = 0; i < data.items.length; i++){
+            var div = document.createElement("div");
+            mainDiv.appendChild(div);
+            div.className = "info";
+            var image = document.createElement("img");
+            image.src = data.items[i].owner.avatar_url;
+            image.width = '100';
+            div.appendChild(image);
+            var login = document.createElement("h3");
+            login.className = "info-text";
+            login.innerHTML = data.items[i].owner.login;
+            div.appendChild(login);
+        }
+            
+//                console.log(data);
+    }
     
     
     
     
 });
-//"https://avatars1.githubusercontent.com/u/34?v=3"
-//events_url
-//:
-//"https://api.github.com/users/nitay/events{/privacy}"
-//followers_url
-//:
-//"https://api.github.com/users/nitay/followers"
-//following_url
-//:
-//"https://api.github.com/users/nitay/following{/other_user}"
-//gists_url
-//:
-//"https://api.github.com/users/nitay/gists{/gist_id}"
-//gravatar_id
-//:
-//""
-//html_url
-//:
-//"https://github.com/nitay"
-//id
-//:
-//34
-//login
-//:
-//"nitay"
-//organizations_url
-//:
-//"https://api.github.com/users/nitay/orgs"
-//received_events_url
-//:
-//"https://api.github.com/users/nitay/received_events"
-//repos_url
-//:
-//"https://api.github.com/users/nitay/repos"
-//site_admin
-//:
-//false
-//starred_url
-//:
-//"https://api.github.com/users/nitay/starred{/owner}{/repo}"
-//subscriptions_url
-//:
-//"https://api.github.com/users/nitay/subscriptions"
-//type
-//:
-//"User"
-//url
-//:
-//"https://api.github.com/users/nitay"

@@ -7,17 +7,21 @@
 html {
 }
 body{
-    justify-content: center;
-    align-items: center;
+  /*  justify-content: center;
+    align-items: center;*/
     min-height: 100%;
     background: #fff;
+    text-align: center;
     
 }
 .container{
+    display: inline-flex;
+    flex: 1;
     width: 1000px;
     margin: 0 auto;
 }
 button{
+    flex-direction: row;
     width: 170px;
     height: 70px;
     margin: 15px;
@@ -26,12 +30,18 @@ button{
     width: 100px;
     height: 100px;
 }
+div{
+    
+/*    flex-direction: row;*/
+/*    height: 100px;*/
+}
 
 .info{
-    padding: 40px;
+/*    padding: 40px;*/
     width: 150px;
     height: 150px;
-    text-align: center;
+    flex-direction: column;
+/*    text-align: center;*/
 }
 img{
     border-radius: 100px;
