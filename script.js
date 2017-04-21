@@ -71,6 +71,7 @@ $( document ).ready(function() {
             mainDiv.appendChild(callLink);
             callLink.href = data[i].html_url;
             callLink.target = '_blank';
+            callLink.className = 'a';
             var image = document.createElement("img");
             image.src = data[i].avatar_url;
             image.width = '100';
@@ -93,6 +94,7 @@ $( document ).ready(function() {
             mainDiv.appendChild(callLink);
             callLink.href = data.items[i].owner.html_url;
             callLink.target = '_blank';
+            callLink.className = 'a';
             var image = document.createElement("img");
             image.src = data.items[i].owner.avatar_url;
             image.width = '100';
@@ -116,6 +118,7 @@ $( document ).ready(function() {
             mainDiv.appendChild(callLink);
             callLink.href = data.items[i].owner.html_url;
             callLink.target = '_blank';
+            callLink.className = 'a';
             var image = document.createElement("img");
             image.src = data.items[i].owner.avatar_url;
             image.width = '100';
