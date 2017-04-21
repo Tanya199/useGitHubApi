@@ -63,20 +63,22 @@ $( document ).ready(function() {
     
     
     function getUsers(data) {
-         var mainDiv = document.createElement("div");
-        wrapperButton.appendChild(mainDiv);
+            var mainDiv = document.createElement("div");
+            wrapperButton.appendChild(mainDiv);
+        
         for(var i = 0; i < data.length; i++){
-            var div = document.createElement("div");
-            mainDiv.appendChild(div);
-            div.className = "info";
+            var callLink = document.createElement('a');
+            mainDiv.appendChild(callLink);
+            callLink.href = data[i].html_url;
+            callLink.target = '_blank';
             var image = document.createElement("img");
             image.src = data[i].avatar_url;
             image.width = '100';
-            div.appendChild(image);
+            callLink.appendChild(image);
             var login = document.createElement("h3");
             login.className = "info-text";
             login.innerHTML = data[i].login;
-            div.appendChild(login);
+            callLink.appendChild(login);
         }
             
 //                console.log(data);
@@ -87,17 +89,18 @@ $( document ).ready(function() {
         wrapTopStars.appendChild(mainDiv);
         
         for(var i = 0; i < data.items.length; i++){
-            var div = document.createElement("div");
-            mainDiv.appendChild(div);
-            div.className = "info";
+            var callLink = document.createElement('a');
+            mainDiv.appendChild(callLink);
+            callLink.href = data.items[i].owner.html_url;
+            callLink.target = '_blank';
             var image = document.createElement("img");
             image.src = data.items[i].owner.avatar_url;
             image.width = '100';
-            div.appendChild(image);
+            callLink.appendChild(image);
             var login = document.createElement("h3");
             login.className = "info-text";
             login.innerHTML = data.items[i].owner.login;
-            div.appendChild(login);
+            callLink.appendChild(login);
         }
             
 //                console.log(data);
@@ -109,17 +112,18 @@ $( document ).ready(function() {
         wrapTopRepozit.appendChild(mainDiv);
         
         for(var i = 0; i < data.items.length; i++){
-            var div = document.createElement("div");
-            mainDiv.appendChild(div);
-            div.className = "info";
+            var callLink = document.createElement('a');
+            mainDiv.appendChild(callLink);
+            callLink.href = data.items[i].owner.html_url;
+            callLink.target = '_blank';
             var image = document.createElement("img");
             image.src = data.items[i].owner.avatar_url;
             image.width = '100';
-            div.appendChild(image);
+            callLink.appendChild(image);
             var login = document.createElement("h3");
             login.className = "info-text";
             login.innerHTML = data.items[i].owner.login;
-            div.appendChild(login);
+            callLink.appendChild(login);
         }
             
 //                console.log(data);
