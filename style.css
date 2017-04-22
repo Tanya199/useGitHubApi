@@ -7,22 +7,58 @@
 html {
 }
 body{
-  /*  justify-content: center;
-    align-items: center;*/
     min-height: 100%;
     background: #fff;
     text-align: center;
+    font-family: 'Maven Pro', 'ubuntu';
+   
     
+}
+.header{
+    width: 100%;
+    height: 50px;
+    background: #24292E;
+    position: relative;
+}
+.head{
+    position: absolute;
+    bottom: 10px;
+    left: 170px;
+    
+    font-weight: 600;
+    font-size: 1.7em;
+    color: #EF6E25;
+}
+.logo{
+    position: absolute;
+    top: -3px;
+    left: 110px;
+}
+.logo_img{
+    border-radius: none;
+    box-shadow: none;
 }
 .container{
     display: inline-flex;
     margin: 0 auto;
+    min-height: 600px;
 }
 button{
-/*     flex-direction: row; */
     width: 170px;
-    height: 70px;
+    height: 30px;
     margin: 15px;
+    border-radius: 5px;
+background: -webkit-linear-gradient(bottom, #EF6E25, gold);
+background: -o-linear-gradient(bottom, #EF6E25, gold);
+background: linear-gradient(to top, #EF6E25, gold);
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+   box-shadow: 0px 3px 3px 0px #666; 
 }
 .div{
     width: 100px;
@@ -36,11 +72,18 @@ button{
 img{
     border-radius: 10px;
     box-shadow: 0 0 7px #666;
+    margin: 10px;
 }
 .info-text{
     color: #0e0e0e;
-    font-size: 1.1em;
-    font-family: 'Maven Pro', 'ubuntu';
-    font-weight: 300;
+    font-size: 1em;
+
+    
+}
+.footer{
+    width: 100%;
+    height: 30px; 
+    margin: 0 auto;
+    background: #24292E;
     
 }

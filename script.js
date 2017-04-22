@@ -3,8 +3,8 @@ $( document ).ready(function() {
     
     
     var body = document.getElementsByTagName("body")[0];
-    var container = document.getElementsByTagName("div")[0];
-    var wrapperButton = document.getElementsByTagName('div')[1];
+    var container = document.getElementsByTagName("div")[3];
+    var wrapperButton = document.getElementsByTagName('div')[4];
     var button = document.getElementsByTagName('button')[0];
     var buttonTopRepozit = document.createElement('button');
     var buttonTopStars = document.createElement('button');
@@ -19,14 +19,14 @@ $( document ).ready(function() {
     function creaButtonTopStars() {
         container.appendChild(wrapTopStars);
         wrapTopStars.appendChild(buttonTopStars);
-        buttonTopStars.innerHTML = "TOP REPOSITORY";
+        buttonTopStars.innerHTML = "Top repository";
         buttonTopStars.addEventListener('click', requestJSONtopStars);
     };
     
     function creaButtonTopRepozit() {
         container.appendChild(wrapTopRepozit);
         wrapTopRepozit.appendChild(buttonTopRepozit);
-        buttonTopRepozit.innerHTML = "TOP RATINGS";
+        buttonTopRepozit.innerHTML = "Top ratings";
         buttonTopRepozit.addEventListener('click', requestJSONtopRepozit)
 
     };
@@ -63,8 +63,10 @@ $( document ).ready(function() {
     
     
     function getUsers(data) {
+            
             var mainDiv = document.createElement("div");
             wrapperButton.appendChild(mainDiv);
+            
         
         for(var i = 0; i < data.length; i++){
             var callLink = document.createElement('a');
