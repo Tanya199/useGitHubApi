@@ -38,7 +38,7 @@ body{
     border-radius: none;
     box-shadow: none;
 }
-.container{
+#container{
     display: inline-flex;
     margin: 0 auto;
     min-height: 600px;
@@ -48,7 +48,7 @@ button{
     height: 30px;
     margin: 15px;
     border-radius: 5px;
-background: -webkit-linear-gradient(bottom, #EF6E25, gold);
+    background: -webkit-linear-gradient(bottom, #EF6E25, gold);
 background: -o-linear-gradient(bottom, #EF6E25, gold);
 background: linear-gradient(to top, #EF6E25, gold);
     border: none;
@@ -58,7 +58,7 @@ background: linear-gradient(to top, #EF6E25, gold);
 }
 
 button:hover {
-   box-shadow: 0px 3px 3px 0px #666; 
+    box-shadow: 0px 3px 3px 0px #666; 
 }
 .div{
     width: 100px;
