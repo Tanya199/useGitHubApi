@@ -37,8 +37,7 @@ $( document ).ready(function() {
         wrapTopReposit.appendChild(buttonTopReposit);
         buttonTopReposit.innerHTML = "Top repos by stars";
         buttonTopReposit.addEventListener('click', requestJSONtopReposit)
-
-    };
+	};
 	
 	function creaButtonTopCommit() {
         container.appendChild(wrapTopCommit);
@@ -91,7 +90,9 @@ $( document ).ready(function() {
         }
 	
     function getTopUsers(data) {
-if(data && data.items.length > 0){isUsersRequestDone = true;}
+		if(data && data.items.length > 0){
+			isUsersRequestDone = true;
+		}
 		var mainDiv = document.createElement("div");
         wrapTopStars.appendChild(mainDiv);
         
@@ -113,7 +114,9 @@ if(data && data.items.length > 0){isUsersRequestDone = true;}
     }
     
     function getTopRepository(data) {
-       if(data && data.items.length > 0){isReposStarsRequestDone = true;}
+		if(data && data.items.length > 0){
+		   isReposStarsRequestDone = true;
+	   }
         var mainDiv = document.createElement("div");
         wrapTopReposit.appendChild(mainDiv);
         
@@ -135,7 +138,9 @@ if(data && data.items.length > 0){isUsersRequestDone = true;}
     }
 	
 	function getTopReposForks(data) {
-       if(data && data.items.length > 0){isReposForksRequestDone = true;}
+		if(data && data.items.length > 0){
+		   isReposForksRequestDone = true;
+	   }
         var mainDiv = document.createElement("div");
         wrapTopCommit.appendChild(mainDiv);
         
@@ -155,10 +160,6 @@ if(data && data.items.length > 0){isUsersRequestDone = true;}
         }
             
     }
-    
-   // button.removeEventListener('click', requestJSON);
-   // button.removeEventListener('click', creaButtonTopStars);
-   // button.removeEventListener('click', creaButtonTopReposit);
     
     
 });
