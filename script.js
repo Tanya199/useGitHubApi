@@ -18,6 +18,7 @@ $( document ).ready(function() {
 		creaButtonTopStars();
 		creaButtonTopReposit();
 		creaButtonTopCommit();
+		
 	});
 	
     
