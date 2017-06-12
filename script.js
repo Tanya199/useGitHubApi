@@ -1,6 +1,6 @@
 
 $( document ).ready(function() {
-	var url = "https://api.github.com/search/repositories";
+	var url = "https://api.github.com/search/";
     var body = document.getElementsByTagName("body")[0];
     var container = document.getElementById("container");
     var wrapperContainer = document.getElementById("wrapper");
@@ -8,14 +8,18 @@ $( document ).ready(function() {
 	
     var buttonTopReposit = document.createElement('button');
     var buttonTopStars = document.createElement('button');
+    var buttonTopCommit = document.createElement('button');
     var wrapTopReposit = document.createElement('div');
     var wrapTopStars = document.createElement('div');
+    var wrapTopCommit = document.createElement('div');
     
     button.addEventListener('click', function(){
-		getUsers();
+		getButtons();
 		creaButtonTopStars();
-		creaButtonTopReposit()
+		creaButtonTopReposit();
+		creaButtonTopCommit();
 	});
+	
     
     function creaButtonTopStars() {
         container.appendChild(wrapTopStars);
@@ -31,20 +35,21 @@ $( document ).ready(function() {
         buttonTopReposit.addEventListener('click', requestJSONtopReposit)
 
     };
+	
+	function creaButtonTopCommit() {
+        container.appendChild(wrapTopCommit);
+        wrapTopCommit.appendChild(buttonTopCommit);
+        buttonTopCommit.innerHTML = "Top commit";
+        buttonTopCommit.addEventListener('click', requestJSONTopCommit);
+    };
     
-    function getUsers() {
-     $.ajax({
-          url: "https://api.github.com/users",
-          success: displayUsers,
-          error: function(error) {
-            console.error('ERROR in get request with status ' + error.status);
-          }
-    }) 
+    function getButtons() {
+    	button.style.display = 'none';
     };
     
     function requestJSONtopStars() {
      $.ajax({
-          url: url + "?q=js&sort=stars&order=desc",
+          url: url + "repositories?q=js&sort=stars&order=desc",
           success: getTopUsers,
           error: function(error) {
             console.error('ERROR in get request with status ' + error.status);
@@ -54,7 +59,7 @@ $( document ).ready(function() {
     
     function requestJSONtopReposit() {
      $.ajax({
-          url: url + "?q=language:JavaScript&sort=stars&order=asc",
+          url: url + "user?q=language:JavaScript&sort=stars&order=asc",
           success: getTopRepository,
           error: function(error) {
             console.error('ERROR in get request with status ' + error.status);
@@ -62,29 +67,22 @@ $( document ).ready(function() {
     }) 
     };
     
+	 function requestJSONTopCommit() {
+     $.ajax({
+          url: url + "user?q=language:JavaScript&sort=stars&order=asc",
+          success: getTopCommit,
+          error: function(error) {
+            console.error('ERROR in get request with status ' + error.status);
+     }
+    }) 
+    };
     
     function displayUsers(data) {
             
             var mainDiv = document.createElement("div");
             wrapperContainer.appendChild(mainDiv);
-            
-        
-        for(var i = 0; i < data.length; i++){
-            var callLink = document.createElement('a');
-            mainDiv.appendChild(callLink);
-            callLink.href = data[i].html_url;
-            callLink.className = 'a';
-            var image = document.createElement("img");
-            image.src = data[i].avatar_url;
-            image.width = '100';
-            callLink.appendChild(image);
-            var login = document.createElement("h3");
-            login.className = "info-text";
-            login.innerHTML = data[i].login;
-            callLink.appendChild(login);
         }
-            
-    }
+	
     function getTopUsers(data) {
         console.log(data);
         var mainDiv = document.createElement("div");
@@ -111,6 +109,28 @@ $( document ).ready(function() {
         console.log(data);
         var mainDiv = document.createElement("div");
         wrapTopReposit.appendChild(mainDiv);
+        
+        for(var i = 0; i < data.items.length; i++){
+            var callLink = document.createElement('a');
+            mainDiv.appendChild(callLink);
+            callLink.href = data.items[i].owner.html_url;
+            callLink.className = 'a';
+            var image = document.createElement("img");
+            image.src = data.items[i].owner.avatar_url;
+            image.width = '100';
+            callLink.appendChild(image);
+            var login = document.createElement("h3");
+            login.className = "info-text";
+            login.innerHTML = data.items[i].owner.login;
+            callLink.appendChild(login);
+        }
+            
+    }
+	
+	function getTopCommit(data) {
+        console.log(data);
+        var mainDiv = document.createElement("div");
+        wrapTopCommit.appendChild(mainDiv);
         
         for(var i = 0; i < data.items.length; i++){
             var callLink = document.createElement('a');
