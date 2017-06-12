@@ -21,10 +21,8 @@ $(document).ready(function () {
 		creaButtonTopStars();
 		creaButtonTopReposit();
 		creaButtonTopCommit();
-		
+
 	});
-
-
 	function creaButtonTopStars() {
 		container.appendChild(wrapTopStars);
 		wrapTopStars.appendChild(buttonTopStars);
@@ -37,7 +35,6 @@ $(document).ready(function () {
 		wrapTopReposit.appendChild(buttonTopReposit);
 		buttonTopReposit.innerHTML = "Top repos by stars";
 		buttonTopReposit.addEventListener('click', requestJSONtopReposit)
-
 	};
 
 	function creaButtonTopCommit() {
@@ -159,12 +156,5 @@ $(document).ready(function () {
 			login.innerHTML = data.items[i].owner.login;
 			callLink.appendChild(login);
 		}
-
 	}
-
-	// button.removeEventListener('click', requestJSON);
-	// button.removeEventListener('click', creaButtonTopStars);
-	// button.removeEventListener('click', creaButtonTopReposit);
-
-
 });
