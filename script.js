@@ -12,27 +12,30 @@ $( document ).ready(function() {
     var wrapTopReposit = document.createElement('div');
     var wrapTopStars = document.createElement('div');
     var wrapTopCommit = document.createElement('div');
+	
+	var isUsersRequestDone;
+	var isReposStarsRequestDone;
+   	var isReposForksRequestDone;
     
     button.addEventListener('click', function(){
 		getButtons();
 		creaButtonTopStars();
 		creaButtonTopReposit();
 		creaButtonTopCommit();
-		
 	});
 	
     
     function creaButtonTopStars() {
         container.appendChild(wrapTopStars);
         wrapTopStars.appendChild(buttonTopStars);
-        buttonTopStars.innerHTML = "Top repository";
+        buttonTopStars.innerHTML = "Top users by stars";
         buttonTopStars.addEventListener('click', requestJSONtopStars);
     };
-    
+     
     function creaButtonTopReposit() {
         container.appendChild(wrapTopReposit);
         wrapTopReposit.appendChild(buttonTopReposit);
-        buttonTopReposit.innerHTML = "Top ratings";
+        buttonTopReposit.innerHTML = "Top repos by stars";
         buttonTopReposit.addEventListener('click', requestJSONtopReposit)
 
     };
@@ -40,7 +43,7 @@ $( document ).ready(function() {
 	function creaButtonTopCommit() {
         container.appendChild(wrapTopCommit);
         wrapTopCommit.appendChild(buttonTopCommit);
-        buttonTopCommit.innerHTML = "Top commit";
+        buttonTopCommit.innerHTML = "Top repos by forks";
         buttonTopCommit.addEventListener('click', requestJSONTopCommit);
     };
     
@@ -49,8 +52,9 @@ $( document ).ready(function() {
     };
     
     function requestJSONtopStars() {
+		if(isUsersRequestDone) return;
      $.ajax({
-          url: url + "repositories?q=js&sort=stars&order=desc",
+          url: url + "users?q=language:JavaScript&sort=stars&order=asc",
           success: getTopUsers,
           error: function(error) {
             console.error('ERROR in get request with status ' + error.status);
@@ -59,8 +63,9 @@ $( document ).ready(function() {
     };
     
     function requestJSONtopReposit() {
+		if(isReposStarsRequestDone) return;
      $.ajax({
-          url: url + "user?q=language:JavaScript&sort=stars&order=asc",
+          url: url + "repositories?q=js&sort=stars&order=desc",
           success: getTopRepository,
           error: function(error) {
             console.error('ERROR in get request with status ' + error.status);
@@ -69,9 +74,10 @@ $( document ).ready(function() {
     };
     
 	 function requestJSONTopCommit() {
+		 if(isReposForksRequestDone) return;
      $.ajax({
-          url: url + "user?q=language:JavaScript&sort=stars&order=asc",
-          success: getTopCommit,
+          url: url + "repositories?q=js&sort=forks&order=desc",
+          success: getTopReposForks,
           error: function(error) {
             console.error('ERROR in get request with status ' + error.status);
      }
@@ -85,29 +91,29 @@ $( document ).ready(function() {
         }
 	
     function getTopUsers(data) {
-        console.log(data);
-        var mainDiv = document.createElement("div");
+if(data && data.items.length > 0){isUsersRequestDone = true;}
+		var mainDiv = document.createElement("div");
         wrapTopStars.appendChild(mainDiv);
         
         for(var i = 0; i < data.items.length; i++){
             var callLink = document.createElement('a');
             mainDiv.appendChild(callLink);
-            callLink.href = data.items[i].owner.html_url;
+            callLink.href = data.items[i].html_url;
             callLink.className = 'a';
             var image = document.createElement("img");
-            image.src = data.items[i].owner.avatar_url;
+            image.src = data.items[i].avatar_url;
             image.width = '100';
             callLink.appendChild(image);
             var login = document.createElement("h3");
             login.className = "info-text";
-            login.innerHTML = data.items[i].owner.login;
+            login.innerHTML = data.items[i].login;
             callLink.appendChild(login);
         }
             
     }
     
     function getTopRepository(data) {
-        console.log(data);
+       if(data && data.items.length > 0){isReposStarsRequestDone = true;}
         var mainDiv = document.createElement("div");
         wrapTopReposit.appendChild(mainDiv);
         
@@ -128,8 +134,8 @@ $( document ).ready(function() {
             
     }
 	
-	function getTopCommit(data) {
-        console.log(data);
+	function getTopReposForks(data) {
+       if(data && data.items.length > 0){isReposForksRequestDone = true;}
         var mainDiv = document.createElement("div");
         wrapTopCommit.appendChild(mainDiv);
         
